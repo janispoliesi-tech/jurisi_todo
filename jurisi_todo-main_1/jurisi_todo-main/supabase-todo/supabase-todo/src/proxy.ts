@@ -1,0 +1,15 @@
+import type { NextRequest } from "next/server";
+import { updateSession } from "@/lib/supabase/session";
+
+export default async function proxy(request: NextRequest) {
+  return updateSession(request);
+}
+
+export const config = {
+  matcher: [
+    /*
+     * Visi ceļi, izņemot statiskos failus un attēlus.
+     */
+    "/((?!_next/static|_next/image|favicon.ico|icon.svg|manifest.webmanifest|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+  ],
+};
